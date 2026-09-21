@@ -1,10 +1,163 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Arpon | EEE Student & Builder</title><link rel="stylesheet" href="style.css"></head><body>
-<header><a class="logo" href="#home">ARPON CHAKLADER<span>.</span></a><nav><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#posts">Updates</a><a href="#contact">Contact</a><a href="admin.html">Admin ↗</a></nav><button class="menu">☰</button></header>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Arpon | EEE Student & Builder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="logo" href="#home">ARPON CHAKLADER<span>.</span></a>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#posts">Updates</a>
+    <a href="#contact">Contact</a>
+    <a href="admin.html">Admin ↗</a>
+  </nav>
+  <button class="menu">☰</button>
+</header>
+
 <main>
-<section id="home" class="hero"><div><small>● EEE STUDENT • BUILDER • LEARNER</small><h1>Turning ideas into <i>real-world</i> engineering.</h1><p>I'm Arpon, an Electrical & Electronic Engineering student who loves practical technology, embedded systems, renewable energy and automation.</p><a class="btn" href="#projects">Explore my work ↗</a></div><div class="photo"><img src="assets/profile.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><b>A</b><span>ADD assets/profile.jpg</span></div></section>
-<section id="about" class="section"><label>01 / ABOUT</label><h2>Curious mind.<br><em>Engineering mindset.</em></h2><p class="large">I enjoy taking a problem, breaking it down, and turning the solution into something people can actually use.</p><p>My interests sit at the intersection of electrical engineering, embedded systems, renewable energy, software and automation.</p></section>
-<section id="skills" class="section"><label>02 / TOOLKIT</label><h2>Things I <em>work with.</em></h2><div class="grid skills"><article>⚡<h3>Embedded & IoT</h3><p>Arduino • ESP32 • Sensors • Automation</p></article><article>⌘<h3>Programming</h3><p>C / C++ • Python • JavaScript • Git</p></article><article>∿<h3>Electrical Engineering</h3><p>Circuits • Machines • Power Systems</p></article><article>☀<h3>Renewable Energy</h3><p>Solar PV • Energy Systems • Sustainability</p></article></div></section>
-<section id="projects" class="section"><label>03 / SELECTED WORK</label><h2>Built with <em>purpose.</em></h2><div id="projectsGrid" class="grid"></div></section>
-<section id="posts" class="section"><label>04 / UPDATES</label><h2>Latest <em>notes.</em></h2><div id="postsGrid" class="grid"></div></section>
-<section id="contact" class="section contact"><label>05 / CONTACT</label><h2>Have an idea?<br><em>Let's build something.</em></h2><p>Open to learning, collaboration and interesting engineering projects.</p><a href="mailto:your.email@example.com">Email ↗</a> <a href="https://github.com/" target="_blank">GitHub ↗</a> <a href="https://linkedin.com/" target="_blank">LinkedIn ↗</a></section>
-</main><footer>© <span id="year"></span> Arpon. Built with curiosity.</footer><script src="data.js"></script><script src="script.js"></script></body></html>
+  <section id="home" class="hero">
+    <div>
+      <small>● EEE STUDENT • BUILDER • LEARNER</small>
+      <h1>Turning ideas into <i>real-world</i> engineering.</h1>
+      <p>I'm Arpon, an Electrical & Electronic Engineering student who loves practical technology, embedded systems, renewable energy and automation.</p>
+      <a class="btn" href="#projects">Explore my work ↗</a>
+    </div>
+    <div class="photo">
+      <img src="assets/profile.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <b>A</b>
+      <span>ADD assets/profile.jpg</span>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <label>01 / ABOUT</label>
+    <h2>Curious mind.<br><em>Engineering mindset.</em></h2>
+    <p class="large">I enjoy taking a problem, breaking it down, and turning the solution into something people can actually use.</p>
+    <p>My interests sit at the intersection of electrical engineering, embedded systems, renewable energy, software and automation.</p>
+  </section>
+
+  <section id="skills" class="section">
+    <label>02 / TOOLKIT</label>
+    <h2>Things I <em>work with.</em></h2>
+    <div class="grid skills">
+      <article>⚡<h3>Embedded & IoT</h3><p>Arduino • ESP32 • Sensors • Automation</p></article>
+      <article>⌘<h3>Programming</h3><p>C / C++ • Python • JavaScript • Git</p></article>
+      <article>∿<h3>Electrical Engineering</h3><p>Circuits • Machines • Power Systems</p></article>
+      <article>☀<h3>Renewable Energy</h3><p>Solar PV • Energy Systems • Sustainability</p></article>
+    </div>
+  </section>
+
+  <section id="projects" class="section">
+    <label>03 / SELECTED WORK</label>
+    <h2>Built with <em>purpose.</em></h2>
+    <div id="projectsGrid" class="grid">Loading projects...</div>
+  </section>
+
+  <section id="posts" class="section">
+    <label>04 / UPDATES</label>
+    <h2>Latest <em>notes.</em></h2>
+    <div id="postsGrid" class="grid">Loading updates...</div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <label>05 / CONTACT</label>
+    <h2>Have an idea?<br><em>Let's build something.</em></h2>
+    <p>Open to learning, collaboration and interesting engineering projects.</p>
+    <a href="mailto:your.email@example.com">Email ↗</a> 
+    <a href="https://github.com/" target="_blank">GitHub ↗</a> 
+    <a href="https://linkedin.com/" target="_blank">LinkedIn ↗</a>
+  </section>
+</main>
+
+<footer>© <span id="year"></span> Arpon. Built with curiosity.</footer>
+
+<!-- Firebase theke live data load korar jonno script -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+      apiKey: "AIzaSyBXcjMpB32RPB7YfDS7wq3Ew5pqSlQn50Q",
+      authDomain: "arpon-portfolio.firebaseapp.com",
+      projectId: "arpor-portfolio", // Apnar config anujayi thik rakha ache
+      storageBucket: "arpon-portfolio.firebasestorage.app",
+      messagingSenderId: "708250635151",
+      appId: "1:708250635151:web:eed45fa7355c5ea84fd9fa",
+      measurementId: "G-4P5301PRR9"
+  };
+
+  // Ekhane sothik projectId bosano nischit korun (ager config er moto)
+  const exactConfig = {
+      apiKey: "AIzaSyBXcjMpB32RPB7YfDS7wq3Ew5pqSlQn50Q",
+      authDomain: "arpon-portfolio.firebaseapp.com",
+      projectId: "arpon-portfolio",
+      storageBucket: "arpon-portfolio.firebasestorage.app",
+      messagingSenderId: "708250635151",
+      appId: "1:708250635151:web:eed45fa7355c5ea84fd9fa",
+      measurementId: "G-4P5301PRR9"
+  };
+
+  const app = initializeApp(exactConfig);
+  const db = getFirestore(app);
+
+  function esc(s) {
+      return String(s ?? "").replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m]));
+  }
+
+  async function loadPublicData() {
+      const pGrid = document.getElementById('projectsGrid');
+      const oGrid = document.getElementById('postsGrid');
+
+      try {
+          // Load Projects
+          const pSnap = await getDocs(collection(db, "projects"));
+          let projects = [];
+          pSnap.forEach(d => projects.push(d.data()));
+          projects.sort((a, b) => (b.id || 0) - (a.id || 0));
+
+          let pHTML = "";
+          projects.forEach(p => {
+              pHTML += `<article class="project-card">
+                  <h3>${esc(p.title)}</h3>
+                  <p class="cat">${esc(p.category)}</p>
+                  <p>${esc(p.description)}</p>
+                  ${p.video ? `<a href="${esc(p.video)}" target="_blank">Watch Video ↗</a>` : ""}
+              </article>`;
+          });
+          if (pGrid) pGrid.innerHTML = pHTML || "<p>No projects added yet.</p>";
+
+          // Load Posts
+          const oSnap = await getDocs(collection(db, "posts"));
+          let posts = [];
+          oSnap.forEach(d => posts.push(d.data()));
+          posts.sort((a, b) => (b.id || 0) - (a.id || 0));
+
+          let oHTML = "";
+          posts.forEach(p => {
+              oHTML += `<article class="post-card">
+                  <small>${esc(p.date)}</small>
+                  <h3>${esc(p.title)}</h3>
+                  <p>${esc(p.excerpt)}</p>
+                  ${p.link ? `<a href="${esc(p.link)}" target="_blank">Read More ↗</a>` : ""}
+              </article>`;
+          });
+          if (oGrid) oGrid.innerHTML = oHTML || "<p>No updates found.</p>";
+
+      } catch (err) {
+          console.error("Error loading public data:", err);
+          if (pGrid) pGrid.innerHTML = "<p>Failed to load projects.</p>";
+          if (oGrid) oGrid.innerHTML = "<p>Failed to load updates.</p>";
+      }
+  }
+
+  loadPublicData();
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
