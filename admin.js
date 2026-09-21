@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBXcjMpB32RPB7YfDS7wq3Ew5pqSlQn50Q",
@@ -16,18 +16,15 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Helper function for escaping HTML
 function esc(s) {
     return String(s ?? "").replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m]));
 }
 
-// Authentication Observer (এখানে Null Check বসানো হয়েছে যাতে ক্র্যাশ না করে)
 onAuthStateChanged(auth, (user) => {
     const loginDiv = document.getElementById('loginDiv');
     const appDiv = document.getElementById('app');
     const modal = document.getElementById('modal');
 
-    // আটকে থাকা কালো বক্স জোর করে হাইড করার জন্য
     if (modal) modal.hidden = true;
 
     if (user) {
@@ -40,30 +37,23 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-// Login
 window.login = function(e) {
     if(e) e.preventDefault();
     const email = document.getElementById('email').value;
     const pass = document.getElementById('pass').value;
     
     signInWithEmailAndPassword(auth, email, pass)
-        .then(() => {
-            alert("Login Successful! 🎉");
-        })
-        .catch((error) => {
-            alert("Login Failed: " + error.message);
-        });
+        .then(() => alert("Login Successful! 🎉"))
+        .catch((error) => alert("Login Failed: " + error.message));
 };
 
-// Logout
 window.logout = function() {
     signOut(auth).then(() => {
         alert("Logged out successfully");
-        window.location.reload(); // লগআউটের পর পেজ রিফ্রেশ করে ক্যাশ ক্লিয়ার করবে
+        window.location.reload();
     });
 };
 
-// Tab Switching
 window.tab = function(x) {
     const projectsTab = document.getElementById('projects');
     const postsTab = document.getElementById('posts');
@@ -71,7 +61,6 @@ window.tab = function(x) {
     if (postsTab) postsTab.hidden = (x !== "posts");
 };
 
-// List Projects and Posts from Firestore
 async function list() {
     const plist = document.getElementById('plist');
     const olist = document.getElementById('olist');
@@ -80,46 +69,104 @@ async function list() {
     if (olist) olist.innerHTML = "Loading posts...";
 
     try {
-        // Load Projects
-        const pQuery = query(collection(db, "projects"), orderBy("id", "desc"));
-        const pSnapshot = await getDocs(pQuery);
+        const pSnapshot = await getDocs(collection(db, "projects"));
+        let projects = [];
+        pSnapshot.forEach((doc) => projects.push({ _docId: doc.id, ...doc.data() }));
+        projects.sort((a, b) => (b.id || 0) - (a.id || 0));
+
         let pHTML = "";
-        pSnapshot.forEach((doc) => {
-            const p = doc.data();
-            pHTML += `<div class=item><div><b>${esc(p.title)}</b><p>${esc(p.category)}</p></div><div><button onclick="projectForm('${doc.id}', '${esc(p.title)}', '${esc(p.category)}', '${esc(p.description)}', '${esc(p.tags)}', '${esc(p.video)}')">Edit</button><button onclick="delProject('${doc.id}')">Delete</button></div></div>`;
+        projects.forEach((p) => {
+            pHTML += `<div class="item">
+                <div><b>${esc(p.title)}</b><p>${esc(p.category)}</p></div>
+                <div>
+                    <button class="edit-proj" data-docid="${p._docId}">Edit</button>
+                    <button class="del-proj" data-docid="${p._docId}">Delete</button>
+                </div>
+            </div>`;
         });
         if (plist) plist.innerHTML = pHTML || "No projects found.";
 
-        // Load Posts
-        const oQuery = query(collection(db, "posts"), orderBy("id", "desc"));
-        const oSnapshot = await getDocs(oQuery);
+        const oSnapshot = await getDocs(collection(db, "posts"));
+        let posts = [];
+        oSnapshot.forEach((doc) => posts.push({ _docId: doc.id, ...doc.data() }));
+        posts.sort((a, b) => (b.id || 0) - (a.id || 0));
+
         let oHTML = "";
-        oSnapshot.forEach((doc) => {
-            const p = doc.data();
-            oHTML += `<div class=item><div><b>${esc(p.title)}</b><p>${esc(p.date)}</p></div><div><button onclick="postForm('${doc.id}', '${esc(p.title)}', '${esc(p.date)}', '${esc(p.excerpt)}', '${esc(p.link)}')">Edit</button><button onclick="delPost('${doc.id}')">Delete</button></div></div>`;
+        posts.forEach((p) => {
+            oHTML += `<div class="item">
+                <div><b>${esc(p.title)}</b><p>${esc(p.date)}</p></div>
+                <div>
+                    <button class="edit-post" data-docid="${p._docId}">Edit</button>
+                    <button class="del-post" data-docid="${p._docId}">Delete</button>
+                </div>
+            </div>`;
         });
         if (olist) olist.innerHTML = oHTML || "No posts found.";
+
+        attachListEvents();
+
     } catch (error) {
         console.error("Error loading data: ", error);
+        if (plist) plist.innerHTML = "Error loading projects.";
+        if (olist) olist.innerHTML = "Error loading posts.";
     }
 }
 
-// Project Form
+function attachListEvents() {
+    document.querySelectorAll('.edit-proj').forEach(btn => {
+        btn.onclick = async () => {
+            const id = btn.dataset.docid;
+            const snap = await getDocs(collection(db, "projects"));
+            snap.forEach(d => {
+                if (d.id === id) {
+                    const p = d.data();
+                    projectForm(id, p.title||'', p.category||'', p.description||'', p.tags||'', p.video||'');
+                }
+            });
+        };
+    });
+
+    document.querySelectorAll('.del-proj').forEach(btn => {
+        btn.onclick = () => delProject(btn.dataset.docid);
+    });
+
+    document.querySelectorAll('.edit-post').forEach(btn => {
+        btn.onclick = async () => {
+            const id = btn.dataset.docid;
+            const snap = await getDocs(collection(db, "posts"));
+            snap.forEach(d => {
+                if (d.id === id) {
+                    const p = d.data();
+                    postForm(id, p.title||'', p.date||'', p.excerpt||'', p.link||'');
+                }
+            });
+        };
+    });
+
+    document.querySelectorAll('.del-post').forEach(btn => {
+        btn.onclick = () => delPost(btn.dataset.docid);
+    });
+}
+
 window.projectForm = function(id = "", title = "", category = "PROJECT", description = "", tags = "", video = "") {
     const modal = document.getElementById('modal');
     const form = document.getElementById('form');
     if (modal) modal.hidden = false;
+    
+    let tagsStr = Array.isArray(tags) ? tags.join(", ") : tags;
+
     if (form) form.innerHTML = `<h2>${id ? "Edit" : "Add"} Project</h2>
-        <div class=field><label>TITLE</label><input id=t value="${title}"></div>
-        <div class=field><label>CATEGORY</label><input id=c value="${category}"></div>
-        <div class=field><label>DESCRIPTION</label><textarea id=d>${description}</textarea></div>
-        <div class=field><label>TAGS (comma separated)</label><input id=g value="${tags}">
+        <div class=field><label>TITLE</label><input id=t value="${esc(title)}"></div>
+        <div class=field><label>CATEGORY</label><input id=c value="${esc(category)}"></div>
+        <div class=field><label>DESCRIPTION</label><textarea id=d>${esc(description)}</textarea></div>
+        <div class=field><label>TAGS (comma separated)</label><input id=g value="${esc(tagsStr)}">
         <div class=taghelp>Example: Arduino, ESP32, IoT</div></div>
-        <div class=field><label>PROJECT VIDEO URL</label><input id=v value="${video}"></div>
-        <button class=submit onclick="saveProject('${id}')">SAVE PROJECT</button>`;
+        <div class=field><label>PROJECT VIDEO URL</label><input id=v value="${esc(video)}"></div>
+        <button class=submit id=saveProjBtn>SAVE PROJECT</button>`;
+
+    document.getElementById('saveProjBtn').onclick = () => saveProject(id);
 };
 
-// Save or Update Project
 window.saveProject = async function(id) {
     const o = {
         id: Date.now(),
@@ -146,7 +193,6 @@ window.saveProject = async function(id) {
     }
 };
 
-// Delete Project
 window.delProject = async function(id) {
     if (confirm("Delete this project?")) {
         try {
@@ -158,20 +204,20 @@ window.delProject = async function(id) {
     }
 };
 
-// Post Form
 window.postForm = function(id = "", title = "", date = new Date().toLocaleDateString("en-GB").toUpperCase(), excerpt = "", link = "") {
     const modal = document.getElementById('modal');
     const form = document.getElementById('form');
     if (modal) modal.hidden = false;
     if (form) form.innerHTML = `<h2>${id ? "Edit" : "Add"} Post</h2>
-        <div class=field><label>TITLE</label><input id=pt value="${title}"></div>
-        <div class=field><label>DATE</label><input id=pd value="${date}"></div>
-        <div class=field><label>CONTENT</label><textarea id=pe>${excerpt}</textarea></div>
-        <div class=field><label>READ MORE URL</label><input id=pl value="${link}"></div>
-        <button class=submit onclick="savePost('${id}')">PUBLISH</button>`;
+        <div class=field><label>TITLE</label><input id=pt value="${esc(title)}"></div>
+        <div class=field><label>DATE</label><input id=pd value="${esc(date)}"></div>
+        <div class=field><label>CONTENT</label><textarea id=pe>${esc(excerpt)}</textarea></div>
+        <div class=field><label>READ MORE URL</label><input id=pl value="${esc(link)}"></div>
+        <button class=submit id=savePostBtn>PUBLISH</button>`;
+
+    document.getElementById('savePostBtn').onclick = () => savePost(id);
 };
 
-// Save or Update Post
 window.savePost = async function(id) {
     const o = {
         id: Date.now(),
@@ -197,7 +243,6 @@ window.savePost = async function(id) {
     }
 };
 
-// Delete Post
 window.delPost = async function(id) {
     if (confirm("Delete this post?")) {
         try {
@@ -209,7 +254,6 @@ window.delPost = async function(id) {
     }
 };
 
-// Close Modal
 window.closeModal = function() {
     const modal = document.getElementById('modal');
     if (modal) modal.hidden = true;
