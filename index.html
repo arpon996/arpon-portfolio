@@ -57,22 +57,88 @@
       Beyond academics, I am deeply involved in tech leadership and community building. I currently serve as the <strong>Assistant Organizing Secretary of the JSTU Robotics Club</strong> and an <strong>Executive Member of the Programming Club</strong>. Alongside participating in <strong>IEEE Student Branch</strong> seminars, these leadership roles allow me to drive collaborative problem-solving, organize tech events, and stay connected with the latest engineering innovations.
     </p>
     <!-- এই অংশটুকু About লেখার ঠিক নিচে বসবে -->
-    <div class="membership-cards" style="margin-top: 40px;">
+    <!-- Community & Memberships Section (Animated) -->
+    <div class="membership-cards" style="margin-top: 40px; width: 100%; overflow: hidden;">
       <h3 style="font-size: 1.2rem; margin-bottom: 20px; color: #fff; border-bottom: 1px solid #333; padding-bottom: 10px; display: inline-block;">Community & Memberships</h3>
       
-      <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px;">
-        
-        <!-- Robotics Club Card -->
-        <div style="flex: 1; min-width: 250px;">
-          <img src="assets/robotics.jpg" alt="Organizing Secretary - JSTU Robotics Club" style="width: 100%; border-radius: 10px; border: 1px solid #333; box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-          <p style="text-align: center; margin-top: 10px; font-size: 0.9rem; color: #aaa;">JSTU Robotics Club</p>
-        </div>
+      <!-- অ্যানিমেশন এবং ডিজাইনের জন্য সিএসএস -->
+      <style>
+        .scrolling-wrapper {
+          width: 100%;
+          overflow: hidden;
+          padding: 10px 0;
+        }
+        .scrolling-track {
+          display: flex;
+          gap: 40px;
+          width: max-content;
+          /* বাম থেকে ডানে যাওয়ার অ্যানিমেশন, 15 সেকেন্ড সময় নেবে */
+          animation: slideTrain 15s linear infinite;
+        }
+        /* মাউস হোভার করলে বা ধরে রাখলে অ্যানিমেশন থেমে যাবে */
+        .scrolling-track:hover {
+          animation-play-state: paused;
+        }
+        @keyframes slideTrain {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100vw); }
+        }
+        .card-box {
+          width: 280px;
+          text-align: center;
+          flex-shrink: 0;
+        }
+        .card-box img {
+          width: 100%;
+          border-radius: 10px;
+          border: 1px solid #333;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+          transition: transform 0.3s ease;
+        }
+        .card-box img:hover {
+          transform: scale(1.05);
+        }
+        .download-btn {
+          display: inline-block;
+          margin-top: 15px;
+          padding: 8px 15px;
+          font-size: 0.8rem;
+          font-weight: bold;
+          color: #111;
+          background-color: #00ffcc; /* নিয়ন কালার বাটন */
+          border-radius: 5px;
+          text-decoration: none;
+          transition: background 0.3s;
+        }
+        .download-btn:hover {
+          background-color: #00ccaa;
+        }
+      </style>
 
-        <!-- Programming Club Card -->
-        <div style="flex: 1; min-width: 250px;">
-          <img src="assets/programming.jpg" alt="Executive Member - Programming Club" style="width: 100%; border-radius: 10px; border: 1px solid #333; box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-          <p style="text-align: center; margin-top: 10px; font-size: 0.9rem; color: #aaa;">Programming Club</p>
+      <div class="scrolling-wrapper">
+        <div class="scrolling-track">
+          
+          <!-- Robotics Club Card -->
+          <div class="card-box">
+            <!-- এখানে আপনার আসল ছবির নাম দিন -->
+            <img src="assets/robotics.jpg" alt="JSTU Robotics Club Card">
+            <p style="margin-top: 10px; font-size: 0.9rem; color: #aaa;">JSTU Robotics Club</p>
+            <!-- ডাউনলোডের লিংক -->
+            <a href="assets/robotics-card.jpg" download="Robotics_Club_Membership.jpg" class="download-btn">⬇ Download Card</a>
+          </div>
+
+          <!-- Programming Club Card -->
+          <div class="card-box">
+            <!-- এখানে আপনার আসল ছবির নাম দিন -->
+            <img src="assets/programming.jpg" alt="Programming Club Card">
+            <p style="margin-top: 10px; font-size: 0.9rem; color: #aaa;">Programming Club</p>
+            <!-- ডাউনলোডের লিংক -->
+            <a href="assets/programming-card.jpg" download="Programming_Club_Membership.jpg" class="download-btn">⬇ Download Card</a>
+          </div>
+
         </div>
+      </div>
+    </div>
 
       </div>
     </div>
