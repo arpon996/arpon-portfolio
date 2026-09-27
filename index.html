@@ -37,8 +37,51 @@
     </div>
     <div class="photo">
       <img src="assets/profile.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <b>Arpon</b>
-      <span>Arpon Chaklader</span>
+      <!-- Floating Name Animation CSS -->
+<style>
+  .floating-brand {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start; /* লেখা বামে সমান থাকবে, মাঝে চাইলে center দিন */
+    line-height: 1.1;
+    animation: floatName 3s ease-in-out infinite;
+    cursor: pointer;
+  }
+  
+  .brand-top {
+    font-size: 1.8rem;
+    color: #ffffff;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .brand-bottom {
+    font-size: 0.85rem;
+    color: #c6f03a; /* আপনার ওয়েবসাইটের থিম কালার */
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* ভাসমান এবং গ্লো অ্যানিমেশন */
+  @keyframes floatName {
+    0%, 100% { 
+      transform: translateY(0px); 
+      text-shadow: 0 0 5px rgba(198, 240, 58, 0.1); 
+    }
+    50% { 
+      transform: translateY(-5px); /* ৫ পিক্সেল উপরে ভাসবে */
+      text-shadow: 0 8px 15px rgba(198, 240, 58, 0.5); /* নিচে হালকা নিয়ন গ্লো দিবে */
+    }
+  }
+</style>
+
+<!-- HTML Part -->
+<div class="floating-brand">
+  <b class="brand-top">Arpon</b>
+  <span class="brand-bottom">Arpon Chaklader</span>
+</div>
     </div>
   </section>
 
