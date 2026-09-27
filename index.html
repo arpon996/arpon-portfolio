@@ -262,6 +262,30 @@
   loadPublicData();
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
-  <script src="script.js"></script>
+  <script>
+  // Mobile Menu Fix
+  const menuBtn = document.querySelector('.menu');
+  const nav = document.querySelector('nav');
+  
+  if (menuBtn && nav) {
+      menuBtn.addEventListener('click', () => {
+          if (nav.style.display === 'flex') {
+              nav.style.display = 'none';
+          } else {
+              nav.style.display = 'flex';
+              nav.style.flexDirection = 'column';
+              nav.style.position = 'absolute';
+              nav.style.top = '60px';
+              nav.style.right = '20px';
+              nav.style.background = '#111';
+              nav.style.padding = '15px';
+              nav.style.borderRadius = '8px';
+              nav.style.border = '1px solid #333';
+              nav.style.zIndex = '9999';
+          }
+      });
+  }
+</script>
+</body>
 </body>
 </html>
