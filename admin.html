@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Arpon Admin</title>
   <link rel="stylesheet" href="admin.css">
-  <style>
-  /* Puro page k center e anar jonno */
+<style>
+  /* পুরো পেজকে সেন্টারে আনার জন্য */
   body {
     background-color: #0f0f0f;
     color: #fff;
@@ -18,45 +18,67 @@
     align-items: center;
   }
 
-  /* Admin dashboard er main container center korar jadu */
-  .container, main, #admin-panel, .wrapper {
-    width: 100%;
-    max-width: 800px; /* Beshi choriye jabe na */
-    margin: 40px auto; /* Upor-niche space ar dane-bame ekdom center */
+  /* জাদুকরী কোড: যেটা X বাটনওয়ালা বক্স এবং অন্যান্য লুকানো জিনিসকে জোর করে লুকিয়ে রাখবে */
+  [hidden] {
+    display: none !important;
   }
 
-  /* Login form er design */
-  #login-section {
+  /* অ্যাডমিন ড্যাশবোর্ডের মেইন কন্টেইনার */
+  .container, main, #app {
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto;
+  }
+
+  /* লগইন বক্সকে একদম স্ক্রিনের মাঝে আনার জন্য */
+  #loginDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh; /* স্ক্রিনের মাঝখানে ভাসিয়ে রাখবে */
+  }
+
+  /* লগইন বক্সের প্রফেশনাল ডিজাইন */
+  #loginDiv .box {
     width: 100%;
     max-width: 400px;
-    margin: 100px auto;
     background: #1a1a1a;
-    padding: 30px;
-    border-radius: 10px;
+    padding: 40px;
+    border-radius: 12px;
     border: 1px solid #333;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     text-align: center;
   }
 
-  #login-section input {
-    width: 90%;
-    padding: 10px;
+  #loginDiv .box input {
+    width: 85%;
+    padding: 12px;
     margin-bottom: 15px;
-    border-radius: 5px;
+    border-radius: 6px;
     border: 1px solid #444;
     background: #222;
     color: white;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  #login-section button {
+  #loginDiv .box button {
     background-color: #c6f03a;
     color: #000;
     font-weight: bold;
-    padding: 10px 20px;
+    padding: 12px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    width: 95%;
+    width: 92%;
+    margin-top: 10px;
+    transition: background 0.3s;
+  }
+
+  #loginDiv .box button:hover {
+    background-color: #aadb25;
   }
 </style>
 </head>
