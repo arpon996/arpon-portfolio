@@ -172,9 +172,7 @@
     <label>04 / UPDATES</label>
     <h2>Latest <em>notes.</em></h2>
     <div id="postsGrid" class="grid">Loading updates...</div>
-  </section>
-
-  <section id="contact" style="padding: 50px 0; position: relative;">
+ <section id="contact" style="padding: 80px 20px; position: relative; max-width: 800px; margin: 0 auto; text-align: center;">
   <label style="color: #c6f03a; font-size: 0.8rem; font-weight: bold; letter-spacing: 2px;">05 / CONTACT</label>
   
   <h2 style="font-size: 3.5rem; margin: 15px 0 10px 0; color: #fff; line-height: 1.1;">
@@ -190,6 +188,7 @@
       display: flex;
       gap: 15px;
       flex-wrap: wrap;
+      justify-content: center; /* বাটনগুলোকে মাঝখানে আনার জাদুকরী কোড */
       margin-bottom: 60px;
     }
     .contact-btn {
@@ -198,7 +197,7 @@
       font-size: 0.95rem;
       padding: 12px 25px;
       border: 1px solid #333;
-      border-radius: 50px; /* Ekdom gol (pill-shape) button */
+      border-radius: 50px;
       transition: all 0.3s ease;
       display: inline-flex;
       align-items: center;
@@ -207,20 +206,20 @@
     }
     .contact-btn:hover {
       color: #000;
-      background-color: #c6f03a; /* Apnar theme color */
+      background-color: #c6f03a;
       border-color: #c6f03a;
-      transform: translateY(-6px); /* Uporer dike float korbe */
-      box-shadow: 0 8px 20px rgba(198, 240, 58, 0.3); /* Neon glow effect */
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(198, 240, 58, 0.3);
     }
     .footer-text {
       color: #555;
       font-size: 0.85rem;
       border-top: 1px solid #222;
       padding-top: 25px;
+      text-align: center; /* ফুটার টেক্সট মাঝখানে */
     }
   </style>
 
- 
   <!-- Contact Buttons -->
   <div class="contact-links">
     <a href="mailto:arponchaklader@gmail.com" class="contact-btn">📧 Email ↗</a>
